@@ -1,5 +1,25 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
+#controllers:
+#    resource:
+#        path: ../src/Controller/
+#        namespace: App\Controller
+#    type: attribute
+
+task_list:
+    path: /
+    controller: App\Controller\TaskController::index
+    methods: GET
+
+task_create:
+    path: /tarea/crear
+    controller: App\Controller\TaskController::create
+    methods: GET
+
+task_edit:
+    path: /tarea/editar
+    controller: App\Controller\TaskController::edit
+    methods: GET
+
+task_delete:
+    path: /tarea/eliminar
+    controller: App\Controller\TaskController::delete
+    methods: GET
