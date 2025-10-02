@@ -19,6 +19,17 @@ doctrine:
         auto_mapping: true
         mappings:
             App:
+#                type: attribute
+#                is_bundle: false
+#                dir: '%kernel.project_dir%/src/Entity'
+#                prefix: 'App\Entity'
+#                alias: App
+#                # ---
+#                type: yaml
+#                is_bundle: false
+#                dir: '%kernel.project_dir%/config/doctrine'
+#                prefix: 'App\Entity'
+#                alias: App
                 type: attribute
                 is_bundle: false
                 dir: '%kernel.project_dir%/src/Entity'

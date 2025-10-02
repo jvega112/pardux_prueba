@@ -15,29 +15,31 @@
     <table class="table table-hover table-bordered my-3" aria-describedby="titulo">
         <thead class="table-dark">
             <tr>
-                <th scope="col">Clave</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Teléfono</th>
-                <th scope="col">Correo</th>
-                <th scope="col">Departamento</th>
+                <th scope="col">Título</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Completado</th>
+                <th scope="col">Creado</th>
+                <th scope="col">Usuario</th>
                 <th scope="col">Opciones</th>
             </tr>
         </thead>
 
         <tbody>
+            {% for task in arrTask %}
             <tr>
-                <td>12345</td>
-                <td>JUAN PEREZ</td>
-                <td>0123456789</td>
-                <td>JUANPEREZ@DOMINIO.COM</td>
-                <td>RECURSOS HUMANOS</td>
+                <td>{{ task.title }}</td>
+                <td>{{ task.description }}</td>
+                <td>{% if task.isCompleted %}<span class="badge text-bg-success">Si</span>{% else %}<span class="badge text-bg-danger">No</span>{% endif %}</td>
+                <td>{{ task.createdAt|date("Y-m-d H:i:s") }}</td>
+                <td>{{ task.createdBy }}</td>
                 <td>
-                    <a href="{{ path('task_edit') }}" class="btn btn-warning btn-sm me-2">Editar</a>
+                    <a href="{{ path('task_edit',{'id_task':task.id}) }}" class="btn btn-primary btn-sm me-2">Editar</a>
 
                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                        data-bs-target="#eliminaModal" data-bs-id="1">Eliminar</button>
+                        data-bs-target="#eliminaModal" data-bs-id="{{ task.id }}">Eliminar</button>
                 </td>
             </tr>
+            {% endfor %}
 
         </tbody>
     </table>
@@ -75,21 +77,23 @@
 
 {% block script %}
     
-    <script>
+<script>
 
-        const eliminaModal = document.getElementById('eliminaModal')
-        if (eliminaModal) {
-            eliminaModal.addEventListener('show.bs.modal', event => {
-                // Button that triggered the modal
-                const button = event.relatedTarget
-                // Extract info from data-bs-* attributes
-                const id = button.getAttribute('data-bs-id')
+const eliminaModal = document.getElementById('eliminaModal');
+if( eliminaModal )
+{
+    eliminaModal.addEventListener('show.bs.modal', event => {
+        // Button that triggered the modal
+        const button = event.relatedTarget;
+        // Extract info from data-bs-* attributes
+        const id = button.getAttribute('data-bs-id');
 
-                // Update the modal's content.
-                const form = eliminaModal.querySelector('#form-elimina')
-                form.setAttribute('action', 'elimina.html?id=' + id)
-            })
-        }
-    </script>
+        // Update the modal's content.
+        const form = eliminaModal.querySelector('#form-elimina')
+        form.setAttribute('action', 'elimina.html?id=' + id);
+    });
+}
+
+</script>
     
 {% endblock %}

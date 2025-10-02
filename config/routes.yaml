@@ -1,9 +1,3 @@
-#controllers:
-#    resource:
-#        path: ../src/Controller/
-#        namespace: App\Controller
-#    type: attribute
-
 task_list:
     path: /
     controller: App\Controller\TaskController::index
@@ -12,12 +6,12 @@ task_list:
 task_create:
     path: /tarea/crear
     controller: App\Controller\TaskController::create
-    methods: GET
+    methods: GET|POST
 
 task_edit:
-    path: /tarea/editar
+    path: /tarea/editar/{id_task}
     controller: App\Controller\TaskController::edit
-    methods: GET
+    methods: GET|POST
 
 task_delete:
     path: /tarea/eliminar

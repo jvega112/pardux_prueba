@@ -1,5 +1,6 @@
 twig:
     file_name_pattern: '*.twig'
+    form_themes: ['_theme/form_errors.html.twig']
 
 when@test:
     twig:
