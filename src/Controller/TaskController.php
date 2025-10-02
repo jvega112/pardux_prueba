@@ -128,9 +128,30 @@ class TaskController extends AbstractController
         ]);
     }
     
-    public function delete()
+    public function delete( Request $request, EntityManagerInterface $em )
     {
-        return $this->render('task/form.html.twig', [
-        ]);
+        $id_task = $request->get('id_task');
+                
+        try
+        {
+            $repository = $em->getRepository(TaskEntity::class);
+            $eTask = $repository->find($id_task);
+            if( empty($eTask) )
+            {
+                throw new \Exception('Tarea no existe');
+            }
+            
+            
+            $em->remove($eTask);
+            $em->flush();
+            
+            $this->addFlash('success', "Registro eliminado exitosamente");
+        }
+        catch( \Exception $ex )
+        {
+            $this->addFlash('error', $ex->getMessage() );
+        }
+        
+        return $this->redirectToRoute('task_list');
     }
 }

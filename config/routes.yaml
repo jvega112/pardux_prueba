@@ -16,4 +16,4 @@ task_edit:
 task_delete:
     path: /tarea/eliminar
     controller: App\Controller\TaskController::delete
-    methods: GET
+    methods: POST

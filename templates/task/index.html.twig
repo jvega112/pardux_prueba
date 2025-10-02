@@ -10,6 +10,20 @@
 
     <h3 class="my-3" id="titulo">Tareas</h3>
 
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success alert-dismissible" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    
+    {% for message in app.flashes('error') %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    
     <a href="{{ path('task_create') }}" class="btn btn-success">Nueva tarea</a>
 
     <table class="table table-hover table-bordered my-3" aria-describedby="titulo">
@@ -61,8 +75,9 @@
                     <p>¿Desea eliminar este registro?</p>
                 </div>
                 <div class="modal-footer">
-                    <form id="form-elimina" action="" method="post">
-                        <input type="hidden" name="_method" value="delete">
+                    <form id="form-elimina" action="{{ path('task_delete') }}" method="post">
+                        {#<input type="hidden" name="_method" value="delete">#}
+                        <input type="hidden" name="id_task" value="">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
@@ -89,8 +104,9 @@ if( eliminaModal )
         const id = button.getAttribute('data-bs-id');
 
         // Update the modal's content.
-        const form = eliminaModal.querySelector('#form-elimina')
-        form.setAttribute('action', 'elimina.html?id=' + id);
+        const form = eliminaModal.querySelector('#form-elimina');
+        //form.setAttribute('action', 'elimina.html?id=' + id);
+        form.querySelector('[name="id_task"]').value = id;
     });
 }
 
