@@ -5,14 +5,14 @@
             <ul>
                 {% for error in errors %}
                 {#<li>{{ error.message }}</li>#}
-                <li><span class="badge text-bg-danger">{{ error.message }}</span></li>
+                <li><span class="badge text-bg-danger"><i class="fa-solid fa-triangle-exclamation"></i> {{ error.message }}</span></li>
                 {% endfor %}
             </ul>
         {% else %}
             {# ... display the errors for a single field #}
             {% for error in errors %}
                 {#<div class="invalid-feedback d-inline">{{ error.message }}</div>#}
-                <span class="badge text-bg-danger">{{ error.message }}</span>
+                <span class="badge text-bg-danger"><i class="fa-solid fa-triangle-exclamation"></i> {{ error.message }}</span>
             {% endfor %}
         {% endif %}
     {% endif %}
